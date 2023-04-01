@@ -1,0 +1,14 @@
+schema: '2.0'
+stages:
+  download_data:
+    cmd: aws s3 cp s3://sign-language-mnist/archive data/processed --recursive
+    deps:
+    - path: s3://sign-language-mnist/archive
+      md5: d10a1ec4562cc370308d77a2aa79e38e.dir
+      size: 210857086
+      nfiles: 7
+    outs:
+    - path: data/processed
+      md5: dce5ff47d2f83a726e773d58bc663eee.dir
+      size: 210857086
+      nfiles: 7

@@ -1,0 +1,7 @@
+stages:
+  download_data:
+    cmd: aws s3 cp s3://sign-language-mnist/archive data/processed --recursive
+    deps:
+    - s3://sign-language-mnist/archive
+    outs:
+    - data/processed
