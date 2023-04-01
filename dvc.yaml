@@ -1,7 +1,9 @@
 stages:
-  download_data:
-    cmd: aws s3 cp s3://sign-language-mnist/archive data/processed --recursive
+  data_load:
+    cmd: aws s3 cp s3://sign-language-mnist/archive/ data --recursive
     deps:
-    - s3://sign-language-mnist/archive
+    - s3://sign-language-mnist/archive/sign_mnist_train/sign_mnist_train.csv
+    - s3://sign-language-mnist/archive/sign_mnist_test/sign_mnist_test.csv
     outs:
-    - data/processed
+    - data/raw/sign_mnist_train/sign_mnist_train.csv
+    - data/raw/sign_mnist_test/sign_mnist_test.csv
