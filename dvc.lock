@@ -1,14 +1,30 @@
 schema: '2.0'
 stages:
   download_data:
-    cmd: aws s3 cp s3://sign-language-mnist/archive data/processed --recursive
+    cmd: aws s3 cp s3://sign-language-mnist/archive data --recursive
     deps:
     - path: s3://sign-language-mnist/archive
       md5: d10a1ec4562cc370308d77a2aa79e38e.dir
       size: 210857086
       nfiles: 7
     outs:
-    - path: data/processed
+    - path: data
       md5: dce5ff47d2f83a726e773d58bc663eee.dir
       size: 210857086
       nfiles: 7
+  data_load:
+    cmd: aws s3 cp s3://sign-language-mnist/archive/ data --recursive
+    deps:
+    - path: s3://sign-language-mnist/archive/sign_mnist_test/sign_mnist_test.csv
+      etag: 92a26cc0dbbb7502a58929f7b0d67330-2
+      size: 21777485
+    - path: s3://sign-language-mnist/archive/sign_mnist_train/sign_mnist_train.csv
+      etag: 20fbf28fda91ae75a2f3f40e49baad52-5
+      size: 83281065
+    outs:
+    - path: data/sign_mnist_test/sign_mnist_test.csv
+      md5: 646c4952c08a4fde552d97a8b80dc296
+      size: 21777485
+    - path: data/sign_mnist_train/sign_mnist_train.csv
+      md5: 261dcaf233fc72e21bd024852c644e55
+      size: 83281065
