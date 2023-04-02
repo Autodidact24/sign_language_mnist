@@ -10,6 +10,7 @@ data_load:
 model:
   architecture: "resnet34"
   pretrained: true
+  save_path: "models/model.pkl"
 
 train:
   num_epochs: 10

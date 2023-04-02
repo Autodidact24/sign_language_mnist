@@ -7,3 +7,21 @@ stages:
     outs:
     - data/sign_mnist_train/sign_mnist_train.csv
     - data/sign_mnist_test/sign_mnist_test.csv
+
+  train:
+    cmd: python train.py
+    deps:
+    - data/processed/sign_mnist_train.csv
+    - data/processed/sign_mnist_test.csv
+    - train.py
+    outs:
+    - model.h5
+
+  evaluate:
+    cmd: python evaluate.py
+    deps:
+    - model.h5
+    - evaluate.py
+    - data/sign_mnist_test/sign_mnist_test.csv
+    outs:
+    - metrics.json
