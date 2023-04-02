@@ -15,7 +15,7 @@ stages:
     - data/processed/sign_mnist_test.csv
     - train.py
     outs:
-    - model.h5
+    - models/model.pkl
 
   evaluate:
     cmd: python evaluate.py
