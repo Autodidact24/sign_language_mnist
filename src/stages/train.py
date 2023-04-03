@@ -1,10 +1,6 @@
-import random
-from functools import partial
 from pathlib import Path
 
-from src.utils import get_images
-import numpy as np
-import torch
+from src.utils.get_images import get_images
 from box import ConfigBox
 from dvclive.fastai import DVCLiveCallback
 from fastai.vision.all import *
@@ -18,11 +14,12 @@ yaml = YAML(typ="safe")
 
 def train():
     params = ConfigBox(yaml.load(open("params.yaml", encoding="utf-8")))
+    print(params)
 
-    train_df = pd.read_csv(config['data_load']['train_data_path'])
+    train_df = pd.read_csv(params['data_load']['train_data_path'])
     train_df = get_images(train_df)
 
-    test_df = pd.read_csv(config['data_load']['test_data_path'])
+    test_df = pd.read_csv(params['data_load']['test_data_path'])
     test_df = get_images(test_df)
 
     def get_x(r): return r['img']
@@ -37,9 +34,7 @@ def train():
         **params.train.fine_tune_args,
         cbs=[DVCLiveCallback(dir="reports/train", report="md")],
     )
-    models_dir = Path("models")
-    models_dir.mkdir(exist_ok=True)
-    learn.export(fname=(models_dir / "model.pkl").absolute())
+    learn.export(fname=(Path("models") / "model.h5").absolute())
 
 
 if __name__ == "__main__":

@@ -1,5 +1,7 @@
+import numpy as np
 import pandas as pd
 from PIL import Image
+from fastai.vision.all import PILImage
 
 
 def get_images(df):

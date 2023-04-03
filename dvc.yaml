@@ -9,11 +9,11 @@ stages:
     - data/sign_mnist_test/sign_mnist_test.csv
 
   train:
-    cmd: python train.py
+    cmd: python src/stages/train.py
     deps:
     - data/processed/sign_mnist_train.csv
     - data/processed/sign_mnist_test.csv
-    - train.py
+    - src/stages/train.py
     outs:
     - models/model.pkl
 

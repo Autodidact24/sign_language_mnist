@@ -18,6 +18,9 @@ train:
   weight_decay: 0.01
   optimizer: Adam
   loss_func: CrossEntropyLoss
+  fine_tune_args:
+    epochs: 8
+    base_lr: 0.001
   metrics:
     - accuracy
     - f1_score
