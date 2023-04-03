@@ -6,3 +6,4 @@ tqdm
 pillow
 dvc[s3]
 dvclive>=1.0
+python-box
