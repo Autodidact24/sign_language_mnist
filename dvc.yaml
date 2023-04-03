@@ -11,8 +11,8 @@ stages:
   train:
     cmd: python src/stages/train.py
     deps:
-    - data/processed/sign_mnist_train.csv
-    - data/processed/sign_mnist_test.csv
+    - data/sign_mnist_train/sign_mnist_train.csv
+    - data/sign_mnist_test/sign_mnist_test.csv
     - src/stages/train.py
     outs:
     - models/model.pkl
