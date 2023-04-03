@@ -18,10 +18,10 @@ stages:
     - models/model.pkl
 
   evaluate:
-    cmd: python evaluate.py
+    cmd: python src/stages/evaluate.py
     deps:
-    - model.h5
-    - evaluate.py
+    - models/model.pkl
+    - src/stages/evaluate.py
     - data/sign_mnist_test/sign_mnist_test.csv
     outs:
-    - metrics.json
+    - reports/metrics.json

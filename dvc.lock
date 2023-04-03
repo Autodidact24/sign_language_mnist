@@ -28,3 +28,35 @@ stages:
     - path: data/sign_mnist_train/sign_mnist_train.csv
       md5: 261dcaf233fc72e21bd024852c644e55
       size: 83281065
+  train:
+    cmd: python src/stages/train.py
+    deps:
+    - path: data/processed/sign_mnist_test.csv
+      md5: f90a439967b4792d8f8b14c0116354e7
+      size: 212035
+    - path: data/processed/sign_mnist_train.csv
+      md5: 9625c2a67fafb90974eedc051a10f2e2
+      size: 813758
+    - path: src/stages/train.py
+      md5: fa330f097bc8310bd745b1a779354a21
+      size: 895
+    outs:
+    - path: models/model.pkl
+      md5: ebb7fcbf02e496542e74b7be13d020cb
+      size: 87881297
+  evaluate:
+    cmd: python src/stages/evaluate.py
+    deps:
+    - path: data/sign_mnist_test/sign_mnist_test.csv
+      md5: 646c4952c08a4fde552d97a8b80dc296
+      size: 21777485
+    - path: models/model.pkl
+      md5: ebb7fcbf02e496542e74b7be13d020cb
+      size: 87881297
+    - path: src/stages/evaluate.py
+      md5: 563feb85cefcf4f223e1dba8ed167a85
+      size: 1317
+    outs:
+    - path: reports/metrics.json
+      md5: 4ac8452cee00d9fa5985116975a4d839
+      size: 32

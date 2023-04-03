@@ -3,5 +3,5 @@ batch_size: 64
 batch_per_epoch: 343
 frozen: false
 frozen_idx: 0
-transforms: "[Pipeline: train.<locals>.get_x -> PILBase.create, Pipeline: train.<locals>.get_y\
-  \ -> Categorize -- {'vocab': None, 'sort': True, 'add_na': False}]"
+transforms: "[Pipeline: get_x -> PILBase.create, Pipeline: get_y -> Categorize --\
+  \ {'vocab': None, 'sort': True, 'add_na': False}]"

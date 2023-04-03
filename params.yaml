@@ -19,8 +19,12 @@ train:
   optimizer: Adam
   loss_func: CrossEntropyLoss
   fine_tune_args:
-    epochs: 8
+    epochs: 2
     base_lr: 0.001
   metrics:
     - accuracy
     - f1_score
+
+evaluate:
+  save_test_preds: true
+  metrics_file: reports/metrics.json

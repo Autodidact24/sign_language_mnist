@@ -5,25 +5,19 @@ from box import ConfigBox
 from dvclive.fastai import DVCLiveCallback
 from fastai.vision.all import *
 
-
 from ruamel.yaml import YAML
 
 yaml = YAML(typ="safe")
 
-
+def get_x(r): return r['img']
+def get_y(r): return r['label']
 
 def train():
     params = ConfigBox(yaml.load(open("params.yaml", encoding="utf-8")))
-    print(params)
 
     train_df = pd.read_csv(params['data_load']['train_data_path'])
     train_df = get_images(train_df)
 
-    test_df = pd.read_csv(params['data_load']['test_data_path'])
-    test_df = get_images(test_df)
-
-    def get_x(r): return r['img']
-    def get_y(r): return r['label']
 
     dblock = DataBlock(blocks=(ImageBlock, CategoryBlock), get_x = get_x, get_y=get_y)
     dls = dblock.dataloaders(train_df)
@@ -34,7 +28,8 @@ def train():
         **params.train.fine_tune_args,
         cbs=[DVCLiveCallback(dir="reports/train", report="md")],
     )
-    learn.export(fname=(Path("models") / "model.h5").absolute())
+    
+    learn.export("models/model.pkl")
 
 
 if __name__ == "__main__":
